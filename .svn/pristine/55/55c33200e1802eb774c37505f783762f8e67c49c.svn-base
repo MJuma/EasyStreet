@@ -1,0 +1,124 @@
+/*
+ * Mohammad Juma
+ * 
+ * TCSS 305 - Autumn 2012
+ * Assignment 2 - Easy Street
+ * September 24, 2012
+ */
+
+import java.util.Map;
+
+/**
+ * Truck object TODO .
+ * 
+ * @author Mohammad Juma
+ * @version 24-09-12
+ */
+public class Truck implements Movable
+{
+
+  public Truck(final int the_vehicle_x, final int the_vehicle_y, Direction the_value_of, Terrain the_value_of2)
+  {
+    // TODO Auto-generated constructor stub
+  }
+
+  @Override
+  public boolean canPass(final Terrain the_terrain, final Light the_light)
+  {
+    // TODO Auto-generated method stub
+    return false;
+  }
+
+  @Override
+  public Direction chooseDirection(final Map<Direction, Terrain> the_neighbors, 
+                                   final Light the_light)
+  {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  public void collide(final Movable the_other)
+  {
+    // TODO Auto-generated method stub
+
+  }
+
+  @Override
+  public int getDeathTime()
+  {
+    // TODO Auto-generated method stub
+    return 0;
+  }
+
+  @Override
+  public String getImageFileName()
+  {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  public Direction getDirection()
+  {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  public int x()
+  {
+    // TODO Auto-generated method stub
+    return 0;
+  }
+
+  @Override
+  public int y()
+  {
+    // TODO Auto-generated method stub
+    return 0;
+  }
+
+  @Override
+  public boolean isAlive()
+  {
+    // TODO Auto-generated method stub
+    return false;
+  }
+
+  @Override
+  public void poke()
+  {
+    // TODO Auto-generated method stub
+
+  }
+
+  @Override
+  public void reset()
+  {
+    // TODO Auto-generated method stub
+
+  }
+
+  @Override
+  public void setDirection(final Direction the_dir)
+  {
+    // TODO Auto-generated method stub
+
+  }
+
+  @Override
+  public void setX(final int the_x)
+  {
+    // TODO Auto-generated method stub
+
+  }
+
+  @Override
+  public void setY(final int the_y)
+  {
+    // TODO Auto-generated method stub
+
+  }
+
+}

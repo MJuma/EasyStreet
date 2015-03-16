@@ -1,0 +1,24 @@
+/*
+ * Mohammad Juma
+ * 
+ * TCSS 305 - Autumn 2012
+ * Assignment 2 - Easy Street
+ * September 24, 2012
+ */
+
+/**
+ * Vehicle object TODO .
+ * 
+ * @author Mohammad Juma
+ * @version 24-09-12
+ */
+public class Vehicle
+{
+  /**
+   * Constructor TODO .
+   */
+  public Vehicle()
+  {
+    System.out.println("s");
+  }
+}

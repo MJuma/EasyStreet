@@ -1,0 +1,171 @@
+/*
+ * Mohammad Juma
+ * 
+ * TCSS 305 - Autumn 2012
+ * Assignment 2 - Easy Street
+ * September 24, 2012
+ */
+
+import java.util.Map;
+
+/**
+ * Bicycle object TODO .
+ * 
+ * @author Mohammad Juma
+ * @version 24-09-12
+ */
+public class Bicycle extends AbstractVehicle
+{
+  /**
+   * The  number of updates between death and revival.
+   */
+  private static final int VEHICLE_DEATH_TIME = 20;
+
+  /**
+   * Bicycle alive file name.
+   */
+  private static final String ALIVE_FILE_NAME = "bicycle.gif";
+
+  /**
+   * Bicycle alive file name.
+   */
+  private static final String DEAD_FILE_NAME = "bicycle_dead.gif";
+
+  /**
+   * 
+   * @param the_coord_x The x coordinate.
+   * @param the_coord_y The y coordinate.
+   * @param the_direction The direction this vehicle travels.
+   * @param the_terrain The type of terrain this vehicle moves on.
+   */
+  public Bicycle(final int the_coord_x, final int the_coord_y, 
+                 final Direction the_direction, final Terrain the_terrain)
+  {
+    super(the_coord_x, the_coord_y, the_direction, the_terrain,
+          ALIVE_FILE_NAME, DEAD_FILE_NAME, VEHICLE_DEATH_TIME);
+  }
+
+  /**
+   * Returns whether or not this object may move onto the given type of
+   * terrain, when the street lights are the given color.
+   * @param the_terrain The terrain.
+   * @param the_light The light color.
+   * @return able_to_pass
+   */
+  public boolean canPass(final Terrain the_terrain, final Light the_light)
+  {    
+    boolean able_to_pass = false;
+
+    if ((the_terrain == Terrain.STREET) || (the_terrain == Terrain.TRAIL) || 
+        (the_terrain == Terrain.LIGHT))
+    {
+      able_to_pass = true;
+    }
+
+    if ((the_terrain == Terrain.LIGHT) && (the_light != Light.GREEN))
+    {
+      able_to_pass = false;
+    }
+    return able_to_pass;
+  }
+
+  /**
+   * Returns the preferred direction of travel.
+   * @param the_neighbors Map of terrain nearby.
+   * @param the_light 
+   * @return direction_to_travel
+   */
+  public Direction chooseDirection(final Map<Direction, Terrain> the_neighbors,
+                                   final Light the_light)
+  {
+    Direction direction_to_travel;
+    final Direction to_trail = findTrail(the_neighbors);
+    final Direction to_street = findStreet(the_neighbors);
+    
+    if (to_trail != Direction.CENTER)
+    {
+      direction_to_travel = to_trail;
+    }
+    else if (to_street != Direction.CENTER)
+    {
+      direction_to_travel = findStreet(the_neighbors);
+    }
+    else
+    {
+      direction_to_travel = Direction.CENTER;
+    }
+    return direction_to_travel;
+  }
+  
+  /**
+   * Returns the direction of a trail if one is nearby.
+   * @param the_neighbors Map of terrain nearby.
+   * @return trail_direction;
+   */
+  private Direction findTrail(final Map<Direction, Terrain> the_neighbors)
+  {
+    Direction trail_direction = Direction.CENTER;
+    
+    if (the_neighbors.get(getDirection()) == Terrain.TRAIL)
+    {
+      trail_direction = getDirection();
+    }
+    else if (the_neighbors.get(getDirection().left()) == Terrain.TRAIL)
+    {
+      trail_direction = getDirection().left();
+    }
+    else if (the_neighbors.get(getDirection().right()) == Terrain.TRAIL)
+    {
+      trail_direction = getDirection().right();
+    }
+    
+    return trail_direction;
+  }
+  
+  /**
+   * Returns the direction of a street or light that the bike can turn onto.
+   * @param the_neighbors Map of terrain nearby.
+   * @return street_direction
+   */
+  private Direction findStreet(final Map<Direction, Terrain> the_neighbors)
+  {
+    Direction street_direction = Direction.CENTER;
+    
+    if ((the_neighbors.get(getDirection()) == Terrain.STREET) || 
+        (the_neighbors.get(getDirection()) == Terrain.LIGHT))
+    {
+      street_direction = getDirection();
+    }
+    else if ((the_neighbors.get(getDirection().left()) == Terrain.STREET) || 
+        (the_neighbors.get(getDirection().left()) == Terrain.LIGHT))
+    {
+      street_direction = getDirection().left();
+    }
+    else if ((the_neighbors.get(getDirection().right()) == Terrain.STREET) || 
+        (the_neighbors.get(getDirection().right()) == Terrain.LIGHT))
+    {
+      street_direction = getDirection().right();
+    }
+    else 
+    {
+      street_direction = getDirection().reverse();
+    }
+    
+    return street_direction;
+  }
+  
+  /**
+   * toString method overridden for debugging purposes.
+   * @return sb.toString()
+   */
+  public String toString()
+  {   
+    final StringBuilder sb = new StringBuilder();
+    sb.append("Bicycle, (");
+    sb.append(x());
+    sb.append(',').append(' ');
+    sb.append(y());
+    sb.append(')');
+    return sb.toString();
+  }
+}
